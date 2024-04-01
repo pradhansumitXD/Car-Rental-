@@ -1,10 +1,22 @@
+import React, { useState } from "react";
 import "../styles/Vroom.css";
 
 export const Vroom = () => {
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
+    setShowAlert(true);
+
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 3000);
+  };
+
   return ( 
     <div className="booking-popup">
       <h2>Book Your Car</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="input-group">
           <div className="input-wrapper">
             <label htmlFor="pickup-location">Pickup Location:</label>
@@ -43,6 +55,12 @@ export const Vroom = () => {
 
         <button type="submit">View Vehicles</button>
       </form>
+
+      {showAlert && (
+        <div className="custom-alert">
+           Submitted successfully!
+        </div>
+      )}
     </div>
   );
 };
